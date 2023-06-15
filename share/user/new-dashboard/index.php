@@ -187,7 +187,7 @@ include("header.php");
                                                        foreach ($results as $i => $result) {
                                                   ?>
                                                             <tr>
-                                                                 <th><?= $result['amount'] ?></th>
+                                                                 <th style="color:white !important">$<?= $result['amount'] ?></th>
                                                                  <td><?= $result['payment_mode'] ?></td>
                                                                  <td><?= $result['status'] ?></td>
                                                                  <td><?= $result['date'] ?></td>

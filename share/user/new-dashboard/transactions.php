@@ -97,7 +97,7 @@ require('header.php');
                                                        foreach ($results as $i => $result) {
                                                   ?>
                                                             <tr>
-                                                                 <th><?= $result['amount'] ?></th>
+                                                                 <th style="color:white !important">$<?= $result['amount'] ?></th>
                                                                  <td><?= $result['payment_mode'] ?></td>
                                                                  <td><?= $result['status'] ?></td>
                                                                  <td><?= $result['date'] ?></td>
@@ -130,10 +130,10 @@ require('header.php');
                                         <table class="table mb-0">
                                              <thead>
                                                   <tr>
-                                                       <th>#</th>
-                                                       <th>First Name</th>
-                                                       <th>Last Name</th>
-                                                       <th>Username</th>
+                                                       <th>Amount</th>
+                                                       <th>Payment Method</th>
+                                                       <th>Status</th>
+                                                       <th>Date</th>
                                                   </tr>
                                              </thead>
                                              <tbody>
@@ -143,7 +143,7 @@ require('header.php');
                                                        foreach ($results as $i => $result) {
                                                   ?>
                                                             <tr>
-                                                                 <th><?= $result['amount'] ?></th>
+                                                                 <th style="color:white !important">$<?= $result['amount'] ?></th>
                                                                  <td><?= $result['payment_mode'] ?></td>
                                                                  <td><?= $result['status'] ?></td>
                                                                  <td><?= $result['date'] ?></td>
@@ -189,8 +189,8 @@ require('header.php');
                                                        foreach ($results as $i => $result) {
                                                   ?>
                                                             <tr>
-                                                                 <th><?= $result['amount'] ?></th>
-                                                                 <th><?= 'Bonus' ?></th>
+                                                                 <th style="color:white !important">$<?= $result['amount'] ?></th>
+                                                                 <th style="color:white !important"><?= 'Bonus' ?></th>
                                                                  <td><?= $result['nirration'] ?></td>
                                                                  <td><?= date('d-m-y', $result['date'])  ?></td>
                                                             </tr>
