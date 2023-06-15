@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     ['active' => 'yes', 'user' => $user_Id]
                );
                if ($result) {
-                    header("Location:user-dashbord/");
+                    header("Location:new-dashboard/");
                     die();
                }
           } else {

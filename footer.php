@@ -2055,17 +2055,8 @@
 <script src="wp-content/plugins/elementor/assets/js/frontend.min007f.js?ver=3.10.2" id="elementor-frontend-js"></script>
 <script src="wp-content/plugins/elementor-pro/assets/js/elements-handlers.min007f.js?ver=3.10.2" id="pro-elements-handlers-js"></script>
 <script src="wp-content/plugins/elementor-pro/assets/lib/sticky/jquery.sticky.min007f.js?ver=3.10.2" id="e-sticky-js"></script>
+<script src="//code.tidio.co/gaqtcndjz4qfl8k3rujah2oibjsxeobt.js" async></script>
 <script type="text/javascript">
-     window.$crisp = [];
-     window.CRISP_WEBSITE_ID = "c3e1d223-469d-4bfc-bf79-2944f051ff58";
-     (function() {
-          d = document;
-          s = d.createElement("script");
-          s.src = "https://client.crisp.chat/l.js";
-          s.async = 1;
-          d.getElementsByTagName("head")[0].appendChild(s);
-     })();
-
      function increaseNumberDaily(number) {
           // Get the current date
           var currentDate = new Date();

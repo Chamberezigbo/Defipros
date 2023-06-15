@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                ['firstN' => $firstN, 'lastN' => $lastN, 'address' => $address, 'state' => $address, 'city' => $city, 'zip' => $zip,  'user' => $user_Id]
           );
           if ($result) {
-               header("Location:user-dashbord/");
+               header("Location:new-dashboard/");
                die();
           } else {
                $errMsg = array(

@@ -121,8 +121,7 @@ include("header.php");
                                                                  <div class="elementor-button-wrapper">
                                                                       <a href="share/user/register.php" class="elementor-button-link elementor-button elementor-size-sm" role="button">
                                                                            <span class="elementor-button-content-wrapper">
-                                                                                <span class="elementor-button-text">Join
-                                                                                     Us</span>
+                                                                                <span class="elementor-button-text">ENROL</span>
                                                                            </span>
                                                                       </a>
                                                                  </div>

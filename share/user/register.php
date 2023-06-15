@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $phone = $_POST['phone'];
                     $password = $_POST['pass'];
                     $country = $_POST['country'];
-                    $balance = 5;
+                    $balance = 0;
                     $user_id = md5(time() . $email);
                     // generate random otp for the user //
                     $digits = 6;
@@ -145,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                          $_SESSION['user_id'] = $user_id;
                          $subject = "Thanks for signing up";
                          sendMail($email, $surname, $subject, str_replace(["##code##"], [$otp], file_get_contents("otpmail.php")));
-                         header("Location:user-dashbord/");
+                         header("Location:new-dashboard/");
                          exit();
                     } else {
                          $_SESSION['error'] = 1;

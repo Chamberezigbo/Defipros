@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                          $_SESSION['start'] = time();
                          $_SESSION['expire'] = $_SESSION['start'] + (40 * 60);
                          $_SESSION["user_id"] = $result['user_id'];
-                         header("Location:user-dashbord/");
+                         header("Location:new-dashboard/");
                          exit();
                     } else {
                          $errMsg = array(
