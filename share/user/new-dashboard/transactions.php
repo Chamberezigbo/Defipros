@@ -138,7 +138,7 @@ require('header.php');
                                              </thead>
                                              <tbody>
                                                   <?php
-                                                  $results = $db->SelectAll("SELECT * FROM deposit WHERE user_id = :userId", ['userId' => $user_Id]);
+$results = $db->SelectAll("SELECT * FROM withdrawal WHERE user_id = :userId", ['userId' => $user_Id]);
                                                   if ($results && count($results)) {
                                                        foreach ($results as $i => $result) {
                                                   ?>

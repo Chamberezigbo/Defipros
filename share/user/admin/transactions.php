@@ -4,6 +4,7 @@ session_start();
 $id = (isset($_GET) && isset($_GET['id'])) ? htmlspecialchars($_GET['id']) : exit();
 
 require('../../../wp-content/process/pdo.php');
+require('../../../wp-content/process/mail.php');
 
 $db = new DatabaseClass();
 
@@ -38,6 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     $currentBAl = $user['balance'] + $checkTrans['amount'];
                     $db->Update("UPDATE users SET balance = :bal WHERE user_id = :uid", ['bal' => $currentBAl, 'uid' => $user['user_id']]);
                     $db->Update("UPDATE deposit SET status = :st, action_type = :type WHERE deposit.id = :id", ['st' => $trans_action, 'id' => $checkTrans['id'], 'type' => "Confirm"]);
+                    $subject = "Deposit Approved";
+                    sendMail($user['email'], $user['username'], $subject, str_replace(["##amount##"], [$checkTrans['amount']], file_get_contents("depositmail.php")));
                     $_SESSION['success'] = true;
                     $_SESSION['msg'] = "Transaction has been updated successfully";
                     //reset post array
@@ -51,9 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                //check if transaction exists
                if ($checkTrans) {
                     $trans_action = (isset($_POST['trans_action']) && !empty($_POST['trans_action']) && intval($_POST['trans_action']) == 1) ? 'confirmed' : 'rejected';
-                    // minunuse from user Balance</
+                    // minuses from user Balance</
                     $currentBAl = $user['balance'] - $checkTrans['amount'];
                     $db->Update("UPDATE withdrawal SET status = :st,action_type = :type WHERE withdrawal.id = :id", ['st' => $trans_action, 'id' => $checkTrans['id'], 'type' => "Confirm"]);
+                    $subject = "Withdraw Approved";
+                    sendMail($user['email'], $user['username'], $subject, str_replace(["##amount##"], [$checkTrans['amount']], file_get_contents("withdrawmail.php")));
                     $_SESSION['success'] = true;
                     $_SESSION['msg'] = "Transaction has been updated successfully";
                     //reset post array
@@ -330,8 +335,8 @@ require 'header.php';
                     } else {
                          $('#modal_view_proof .modal-body').html(`
                          <div class="p-3"> 
-                              <img src="${'../user-dashbord/uploads/' + this.getAttribute("data-proof-image")}" class="img-fluid mb-3" style="border-radius:10px" />
-                              <a download href="../user-dashbord/uploads/${this.getAttribute("data-proof-image")}" class="btn btn-success">Download</a>
+                              <img src="${'../new-dashboard/uploads/' + this.getAttribute("data-proof-image")}" class="img-fluid mb-3" style="border-radius:10px" />
+                              <a download href="../new-dashboard/uploads/${this.getAttribute("data-proof-image")}" class="btn btn-success">Download</a>
                          </div>
                     `);
                     }

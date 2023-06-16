@@ -54,25 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           //Selecting a single row!//
           if (isset($ref)) {
                $result = $db->SelectOne("SELECT * FROM users WHERE username = :username", ['username' => $ref]);
+               $email = $_POST['email'];
                if ($result) {
-                    $bonusAmount = '5';
-                    $bonusNiretion = "Referal Bonus";
-                    $bonusQuery = "INSERT INTO bonus (userId, amount,nirration,date) VALUES(:userId, :amount, :nirration, :date)";
-                    $bonusData = [
-                         "userId" => $result['user_id'],
-                         "amount" => $bonusAmount,
-                         "nirration" => $bonusNiretion,
-                         "date" =>  time()
-                    ];
-                    $insertBonus = $db->Insert($bonusQuery, $bonusData);
-                    $balance = $result['balance'];
-                    $totalRef = $result['total_ref_bonus'];
-                    $totalRef = $totalRef + 5;
-                    $balance = $balance + $totalRef;
-                    $secondResult = $db->Update(
-                         "UPDATE users SET balance = :balance, total_ref_bonus = :bonus WHERE username = :username",
-                         ['balance' => $balance, 'bonus' => $totalRef, 'username' => $ref]
-                    );
+                    // Send mail //
+                    $subject = "Signup | Referral Link Used";
+                    sendMail($result['email'], $ref, $subject, str_replace(["##someone##"], [$email], file_get_contents("referralmail.php")));
                } else {
                     $ref = NULL;
                }

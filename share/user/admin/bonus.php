@@ -2,6 +2,7 @@
 session_start();
 require '../../../wp-content/process/octaValidate-PHP-main/src/Validate.php';
 require('../../../wp-content/process/pdo.php');
+require('../../../wp-content/process/mail.php');
 
 $id = (isset($_GET) && isset($_GET['id'])) ? htmlspecialchars($_GET['id']) : exit();
 
@@ -54,10 +55,13 @@ try {
                          $balance = $balance + $_POST["amount"];
                          $update = $db->Update("UPDATE users SET balance = :balance WHERE user_id = :userId", ['balance' => $balance, 'userId' => $id]);
                     }
+                    $amount = $_POST["amount"];
+                    $subject = "Bonus Sent";
+                    sendMail($users['email'], $users['username'], $subject, str_replace(["##amount##"], [$amount], file_get_contents("bonusmail.php")));
                     $_SESSION['success'] = true;
                     $_SESSION['msg'] = "Bonus added successfully";
                     //reset post array
-                    header("Location: ./profit.php");
+                    header("Location: ./add-bonus.php");
                     exit();
                }
           } else {

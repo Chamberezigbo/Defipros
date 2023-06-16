@@ -253,8 +253,8 @@ require 'header.php';
                     } else {
                          $('#modal_view_proof .modal-body').html(`
                          <div class="p-3"> 
-                              <img src="${'../user-dashbord/uploads/' + this.getAttribute("data-proof-image")}" class="img-fluid mb-3" style="border-radius:10px" />
-                              <a download href="../user-dashbord/uploads/${this.getAttribute("data-proof-image")}" class="btn btn-success">Download</a>
+                              <img src="${'../new-dashboard/uploads/' + this.getAttribute("data-proof-image")}" class="img-fluid mb-3" style="border-radius:10px" />
+                              <a download href="../new-dashboard/uploads/${this.getAttribute("data-proof-image")}" class="btn btn-success">Download</a>
                          </div>
                     `);
                     }
