@@ -30,10 +30,11 @@
           <!-- <span style="font-family: 'Unbounded', cursive;margin: 20px;font-weight: bold;margin-left: 10rem;margin-top: 3rem;">CHIPPER INVESTMENT</span> -->
           <hr style="width: 96%" />
           <div class="text">
-               <h1> Withdrawal $##amount## Approved </h1>
-               <p style="margin-top: 5%">Your withdrawal has been approved!</p>
+               <h1> Withdrawal Status </h1>
+               <p style="margin-top: 5%">Hello ##username##</p>
                <p style="font-size: 11px; text-align: justify; line-height: 2">
-                    We are pleased to inform you that your withdrawal request has been approved. The funds will be processed and sent to your account within 24 hours.
+                    This is to inform you that your withdrawal request of $##amount## has being successfully approved and sent your chosen ##coin##
+                    wallet address ##address##. Do ensure to check your dashboard ad wallet to verify this claim
                </p>
                <p style=" margin-top: 3%; font-size: 11px; text-align: justify; line-height: 2; ">
                     If you have any questions or concerns, please do not hesitate to contact us. We are here to help.

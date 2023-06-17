@@ -35,13 +35,14 @@
 
           <div class="text">
                <h1>
-                    Deposit Approved $##amount##
+                    Hello ##firstName## (##username##)
                </h1>
 
-               <p style="margin-top: 5%">Congratulations!</p>
                <p style="font-size: 11px; text-align: justify; line-height: 2">
-                    Your deposit has been approved. Your funds will be credited to
-                    your account shortly.
+                    Your deposit request of ##amount## USD is vai ##coin## is Approved. <br>
+                    <br>Details of your Deposit: <br>
+                    Amount: ##amount## USD
+                    Charge: <span style="color: red;">0.00 USD</span>
                </p>
 
                <p style="

@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     $db->Update("UPDATE users SET balance = :bal WHERE user_id = :uid", ['bal' => $currentBAl, 'uid' => $user['user_id']]);
                     $db->Update("UPDATE deposit SET status = :st, action_type = :type WHERE deposit.id = :id", ['st' => $trans_action, 'id' => $checkTrans['id'], 'type' => "Confirm"]);
                     $subject = "Deposit Approved";
-                    sendMail($user['email'], $user['username'], $subject, str_replace(["##amount##"], [$checkTrans['amount']], file_get_contents("depositmail.php")));
+                    sendMail($user['email'], $user['username'], $subject, str_replace(["##amount##", "##firstName##", "##username##", "##coin##"], [$checkTrans['amount'], $user['first_name'], $user['username'], $checkTrans['payment_mode']], file_get_contents("depositmail.php")));
                     $_SESSION['success'] = true;
                     $_SESSION['msg'] = "Transaction has been updated successfully";
                     //reset post array
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     $currentBAl = $user['balance'] - $checkTrans['amount'];
                     $db->Update("UPDATE withdrawal SET status = :st,action_type = :type WHERE withdrawal.id = :id", ['st' => $trans_action, 'id' => $checkTrans['id'], 'type' => "Confirm"]);
                     $subject = "Withdraw Approved";
-                    sendMail($user['email'], $user['username'], $subject, str_replace(["##amount##"], [$checkTrans['amount']], file_get_contents("withdrawmail.php")));
+                    sendMail($user['email'], $user['username'], $subject, str_replace(["##amount##", "##username##", "##coin##", "##address##"], [$checkTrans['amount'], $user['username'], $checkTrans['receive_mode'], $checkTrans['address']], file_get_contents("withdrawmail.php")));
                     $_SESSION['success'] = true;
                     $_SESSION['msg'] = "Transaction has been updated successfully";
                     //reset post array

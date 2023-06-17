@@ -63,7 +63,7 @@ include("header.php");
                <div class="row justify-content-center">
                     <div class="col-md-12">
                          <?php
-                         if ($totalDeposit == 0) :
+                         if ($balance == 0) :
                          ?>
                               <div class="alert border border--danger" role="alert">
                                    <div class="alert__icon d-flex align-items-center text--danger"><i class="fas fa-exclamation-triangle"></i></div>
@@ -95,8 +95,8 @@ include("header.php");
                               <div class="col-xl-4 col-sm-6 mb-30">
                                    <div class="d-widget d-flex justify-content-between gap-5">
                                         <div class="left-content">
-                                             <span class="caption">Deposit Wallet Balance</span>
-                                             <h4 class="currency-amount">$<?= $totalDeposit ?></h4>
+                                             <span class="caption">Wallet Balance</span>
+                                             <h4 class="currency-amount">$<?= $balance ?></h4>
                                         </div>
                                         <div class="icon ms-auto">
                                              <i class="las la-dollar-sign"></i>

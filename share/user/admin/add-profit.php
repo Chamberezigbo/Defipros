@@ -59,7 +59,7 @@ require('header.php');
                                    ?>
                                         <tr>
                                              <th scope="row"><?php echo ++$i; ?></th>
-                                             <td><?php print(stripslashes($user['fullName'])) ?></td>
+                                             <td><?php print(stripslashes($user['first_name'])) ?></td>
                                              <td><?php print(stripslashes($user['email'])) ?></td>
                                              <td><?php print(stripslashes($user['phone'])) ?></td>
                                              <td>

@@ -74,6 +74,26 @@ require('header.php');
           </div>
      </div>
 </div>
+
+<script>
+     function copyToClipboard(element) {
+          var copyText = element.textContent;
+          var input = document.createElement("input");
+          input.setAttribute("value", copyText);
+          input.setAttribute("type", "text");
+          input.setAttribute("readonly", "readonly");
+          input.style.position = "absolute";
+          input.style.left = "-9999px";
+          document.body.appendChild(input);
+          input.select();
+          document.execCommand("copy");
+          input.remove();
+     }
+
+     document.getElementById("copyBoard").addEventListener("click", function() {
+          copyToClipboard(this);
+     });
+</script>
 <?php
 require('footer.php');
 ?>

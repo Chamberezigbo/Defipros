@@ -43,12 +43,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                          //check balance
                          if (intval($balance) > intval($_POST['amount'])) {
                               //process withdrawal
-                              $db->Insert("INSERT INTO withdrawal (user_id, amount, charges, receive_mode, date) VALUES (:uid, :amt, :cha, :rec, :date)", [
+                              $db->Insert("INSERT INTO withdrawal (user_id, amount, charges, receive_mode, address, date) VALUES (:uid, :amt, :cha, :rec,:addr, :date)", [
                                    "uid" => $user_Id,
                                    "amt" => $_POST['amount'],
                                    "cha" => "DEFAULT",
                                    //$_POST['']
-                                   "rec" => "DEFAULT",
+                                   "rec" => $_POST['method_code'],
+                                   "addr" => $_POST['details'],
                                    "date" => time()
                               ]);
                               //success
@@ -179,9 +180,9 @@ require('header.php');
                                              <label class="form-label">Method</label>
                                              <select class="form-control form--control" name="method_code" required>
                                                   <option value="">Select Gateway</option>
-                                                  <option value="1" data-resource="{&quot;id&quot;:1,&quot;form_id&quot;:21,&quot;name&quot;:&quot;Bitcoin&quot;,&quot;min_limit&quot;:&quot;10.00000000&quot;,&quot;max_limit&quot;:&quot;1000000.00000000&quot;,&quot;fixed_charge&quot;:&quot;0.00000000&quot;,&quot;rate&quot;:&quot;0.00004700&quot;,&quot;percent_charge&quot;:&quot;0.00&quot;,&quot;currency&quot;:&quot;Btc&quot;,&quot;description&quot;:&quot;Please enter your Bitcoin wallet address below&quot;,&quot;status&quot;:1,&quot;created_at&quot;:&quot;2023-01-18T07:14:05.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-01-18T07:14:05.000000Z&quot;}"> Bitcoin</option>
-                                                  <option value="2" data-resource="{&quot;id&quot;:2,&quot;form_id&quot;:22,&quot;name&quot;:&quot;Ethereum&quot;,&quot;min_limit&quot;:&quot;10.00000000&quot;,&quot;max_limit&quot;:&quot;1000000.00000000&quot;,&quot;fixed_charge&quot;:&quot;0.00000000&quot;,&quot;rate&quot;:&quot;0.00063000&quot;,&quot;percent_charge&quot;:&quot;0.00&quot;,&quot;currency&quot;:&quot;Eth&quot;,&quot;description&quot;:&quot;Please enter your Ethereum wallet address below&quot;,&quot;status&quot;:1,&quot;created_at&quot;:&quot;2023-01-18T07:15:38.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-01-18T07:15:38.000000Z&quot;}"> Ethereum</option>
-                                                  <option value="3" data-resource="{&quot;id&quot;:3,&quot;form_id&quot;:23,&quot;name&quot;:&quot;USDT TRC20&quot;,&quot;min_limit&quot;:&quot;10.00000000&quot;,&quot;max_limit&quot;:&quot;1000000.00000000&quot;,&quot;fixed_charge&quot;:&quot;0.00000000&quot;,&quot;rate&quot;:&quot;1.00000000&quot;,&quot;percent_charge&quot;:&quot;0.00&quot;,&quot;currency&quot;:&quot;USDT&quot;,&quot;description&quot;:&quot;Please enter your USDT TRC20 wallet address below&quot;,&quot;status&quot;:1,&quot;created_at&quot;:&quot;2023-01-18T07:16:39.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-01-18T07:16:39.000000Z&quot;}"> USDT TRC20</option>
+                                                  <option value="Bitcoin" data-resource="{&quot;id&quot;:1,&quot;form_id&quot;:21,&quot;name&quot;:&quot;Bitcoin&quot;,&quot;min_limit&quot;:&quot;10.00000000&quot;,&quot;max_limit&quot;:&quot;1000000.00000000&quot;,&quot;fixed_charge&quot;:&quot;0.00000000&quot;,&quot;rate&quot;:&quot;0.00004700&quot;,&quot;percent_charge&quot;:&quot;0.00&quot;,&quot;currency&quot;:&quot;Btc&quot;,&quot;description&quot;:&quot;Please enter your Bitcoin wallet address below&quot;,&quot;status&quot;:1,&quot;created_at&quot;:&quot;2023-01-18T07:14:05.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-01-18T07:14:05.000000Z&quot;}"> Bitcoin</option>
+                                                  <option value="Ethereum" data-resource="{&quot;id&quot;:2,&quot;form_id&quot;:22,&quot;name&quot;:&quot;Ethereum&quot;,&quot;min_limit&quot;:&quot;10.00000000&quot;,&quot;max_limit&quot;:&quot;1000000.00000000&quot;,&quot;fixed_charge&quot;:&quot;0.00000000&quot;,&quot;rate&quot;:&quot;0.00063000&quot;,&quot;percent_charge&quot;:&quot;0.00&quot;,&quot;currency&quot;:&quot;Eth&quot;,&quot;description&quot;:&quot;Please enter your Ethereum wallet address below&quot;,&quot;status&quot;:1,&quot;created_at&quot;:&quot;2023-01-18T07:15:38.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-01-18T07:15:38.000000Z&quot;}"> Ethereum</option>
+                                                  <option value="USDTTRC20" data-resource="{&quot;id&quot;:3,&quot;form_id&quot;:23,&quot;name&quot;:&quot;USDT TRC20&quot;,&quot;min_limit&quot;:&quot;10.00000000&quot;,&quot;max_limit&quot;:&quot;1000000.00000000&quot;,&quot;fixed_charge&quot;:&quot;0.00000000&quot;,&quot;rate&quot;:&quot;1.00000000&quot;,&quot;percent_charge&quot;:&quot;0.00&quot;,&quot;currency&quot;:&quot;USDT&quot;,&quot;description&quot;:&quot;Please enter your USDT TRC20 wallet address below&quot;,&quot;status&quot;:1,&quot;created_at&quot;:&quot;2023-01-18T07:16:39.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-01-18T07:16:39.000000Z&quot;}"> USDT TRC20</option>
                                              </select>
                                         </div>
                                         <div class="form-group">
