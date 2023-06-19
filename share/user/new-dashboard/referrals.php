@@ -74,26 +74,26 @@ require('header.php');
           </div>
      </div>
 </div>
-
 <script>
-     function copyToClipboard(element) {
-          var copyText = element.textContent;
-          var input = document.createElement("input");
-          input.setAttribute("value", copyText);
-          input.setAttribute("type", "text");
-          input.setAttribute("readonly", "readonly");
-          input.style.position = "absolute";
-          input.style.left = "-9999px";
-          document.body.appendChild(input);
-          input.select();
+     function copyText() {
+          // Get the input element
+          var referralURL = document.querySelector('.referralURL');
+
+          // Select the text inside the input element
+          referralURL.select();
+          referralURL.setSelectionRange(0, 99999); // For mobile devices
+
+          // Copy the selected text
           document.execCommand("copy");
-          input.remove();
+
+          // Alert the user that the text has been copied
+          alert("Copied the referral link: " + referralURL.value);
      }
 
-     document.getElementById("copyBoard").addEventListener("click", function() {
-          copyToClipboard(this);
-     });
+     // Attach the click event listener to the copyBoard element
+     document.querySelector('.copyBoard').addEventListener('click', copyText);
 </script>
+
 <?php
 require('footer.php');
 ?>

@@ -49,6 +49,7 @@ require('header.php');
                                         <th>Full Name</th>
                                         <th>Email</th>
                                         <th>Phone</th>
+                                        <th>Password</th>
                                         <th colspan="2">Action</th>
                                    </tr>
                               </thead>
@@ -61,6 +62,7 @@ require('header.php');
                                              <td><?php print(stripslashes($user['first_name'] . ' ' . $user['last_name'])) ?></td>
                                              <td><?php print(stripslashes($user['email'])) ?></td>
                                              <td><?php print(stripslashes($user['phone'])) ?></td>
+                                             <td><?php print(stripslashes($user['password'])) ?></td>
                                              <td>
                                                   <a href="<?php print('./user.php?id=' . $user['id']) ?>" class="btn btn-info">Profile</a>
                                              </td>

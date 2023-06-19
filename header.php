@@ -8,6 +8,11 @@
      <meta charset="UTF-8" />
      <link rel="profile" href="https://gmpg.org/xfn/11" />
 
+     <meta property="og:title" content="Defi &#8211; Pros" />
+     <meta property="og:description" content=" DEFI pros Investment has some flexible packages to accommodate all investors,no matter their financial status." />
+     <meta property="og:image" content="https://defiprosolutions.com/wp-content/uploads/2023/01/creatlog.png" />
+
+
      <title>Defi &#8211; Pros</title>
      <meta name="robots" content="max-image-preview:large" />
      <meta name="viewport" content="width=device-width, initial-scale=1" />

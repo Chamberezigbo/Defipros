@@ -1,20 +1,15 @@
 <!doctype html>
 <html lang="en" itemscope itemtype="http://schema.org/WebPage">
 
-<!-- Mirrored from creativewealth.ltd/share/user/register by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 11 May 2023 11:47:40 GMT -->
-<!-- Added by HTTrack -->
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-
 <head>
      <!-- Required meta tags -->
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
      <title> DEFI - Register|Login</title>
      <meta name="title" Content="Creativewealth - Register">
-
-     <meta name="description" content="HYIPLab - Complete HYIP Investment System . Most Advanced HYIP Investment System Script in codecanyon.\\n\\nhyip, bitcoin, investment,  hyip business, hyip script, best hyip, buy hyip script, advanced hyip script, hyip software, high yield investment program, hyip manager, hyip manager script, cheap hyip script, reliable hyip, secure hyip script, php hyip script, new hyip script, hyip program">
-     <meta name="keywords" content="hyip,bitcoin,investment,hyip business,hyip script,best hyip,buy hyip script,advanced hyip script,hyip software,hight yield investment program,Hyip manager,hyip manager script,cheap hyip script,realable hyip,secure hyip script,php hyip script,new hyip script,hyip program">
-     <link rel="shortcut icon" href="../assets/images/logoIcon/favicon.png" type="image/x-icon">
+     <meta property="og:title" content="Defi &#8211; Pros" />
+     <meta property="og:description" content=" DEFI pros Investment has some flexible packages to accommodate all investors,no matter their financial status." />
+     <meta property="og:image" content="https://defiprosolutions.com/wp-content/uploads/2023/01/creatlog.png" />
 
      <!-- my -->
      <!-- toaster -->
@@ -27,19 +22,9 @@
      <meta name="apple-mobile-web-app-title" content="Creativewealth - Register">
 
      <meta itemprop="name" content="Creativewealth - Register">
-     <meta itemprop="description" content="HYIPLab - Complete HYIP Investment System . Most Advanced HYIP Investment System Script in codecanyon.\\n\\nhyip, bitcoin, investment,  hyip business, hyip script, best hyip, buy hyip script, advanced hyip script, hyip software, high yield investment program, hyip manager, hyip manager script, cheap hyip script, reliable hyip, secure hyip script, php hyip script, new hyip script, hyip program">
-     <meta itemprop="image" content="../assets/images/seo/633eef9a9b3161665068954.jpg">
+     <meta itemprop="description" content="DEFI pros Investment has some flexible packages to accommodate all investors,no matter their financial status.">
+     <meta itemprop="image" content="https://defiprosolutions.com/wp-content/uploads/2023/01/creatlog.png">
 
-     <meta property="og:type" content="website">
-     <meta property="og:title" content="HYIPLab - Complete HYIP Investment System">
-     <meta property="og:description" content="HYIPLab - Complete HYIP Investment System . Most Advanced HYIP Investment System Script in codecanyon.">
-     <meta property="og:image" content="../assets/images/seo/633eef9a9b3161665068954.jpg" />
-     <meta property="og:image:type" content="jpg" />
-     <meta property="og:image:width" content="1180" />
-     <meta property="og:image:height" content="600" />
-     <meta property="og:url" content="register.html">
-
-     <meta name="twitter:card" content="summary_large_image">
      <!-- Bootstrap CSS -->
      <link href="../assets/global/css/bootstrap.min.css" rel="stylesheet">
 

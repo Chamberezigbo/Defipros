@@ -168,6 +168,7 @@ require 'header.php';
                                              <th>Amount </th>
                                              <th>Charges</th>
                                              <th>Payment mode </th>
+                                             <th>Wallet Address</th>
                                              <th>Status</th>
                                              <th>Date</th>
                                              <th class="tect-center" colspan="2">Action</th>
@@ -193,6 +194,9 @@ require 'header.php';
                                                   </td>
                                                   <td>
                                                        <?php echo ($withdrawal['receive_mode']); ?>
+                                                  </td>
+                                                  <td>
+                                                       <?php echo ($withdrawal['address']); ?>
                                                   </td>
                                                   <td>
                                                        <?php echo ($withdrawal['status']); ?>

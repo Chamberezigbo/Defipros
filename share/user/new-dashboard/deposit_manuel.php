@@ -126,7 +126,7 @@ require('header.php');
                     <div class="col-md-8">
                          <div class="card custom--card">
                               <div class="card-header card-header-bg">
-                                   <h5 class="text-center"> <i class="las la-wallet"></i> Bitcoin Payment</h5>
+                                   <h5 class="text-center" style="color:white !important;"> <i class="las la-wallet"></i> <?= $_SESSION['paymentMode'] ?></h5>
                               </div>
                               <div class="card-body  ">
                                    <form action="" id="form_confirm_payment" method="POST" enctype="multipart/form-data">
@@ -136,7 +136,7 @@ require('header.php');
                                                   <p class="text-center mt-2">You have requested <b class="text-success"><?= $_SESSION['paymentAmount'] ?></b> , Please pay <b class="text-success"> <?= $_SESSION['paymentMode'] ?></b> for successful payment </p>
 
                                                   <div class="my-4">
-                                                       <p>Please make payment to the Bitcoin wallet details below. Click To Copy.
+                                                       <p>Please make payment to the <?= $_SESSION['paymentMode'] ?> wallet details below. Click To Copy.
                                                        <div><?= $_SESSION["addr"] ?><br></div>
                                                        </p>
                                                   </div>
