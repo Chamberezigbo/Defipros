@@ -37,7 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                if ($checkTrans) {
                     $trans_action = (isset($_POST['trans_action']) && !empty($_POST['trans_action']) && intval($_POST['trans_action']) == 1) ? 'confirmed' : 'rejected';
                     $currentBAl = $user['balance'] + $checkTrans['amount'];
-                    $db->Update("UPDATE users SET balance = :bal WHERE user_id = :uid", ['bal' => $currentBAl, 'uid' => $user['user_id']]);
+                    $totalD = $user['total_deposit'] + $checkTrans['amount'];
+                    $db->Update("UPDATE users SET balance = :bal, total_deposit = :totalD WHERE user_id = :uid", ['bal' => $currentBAl, 'totalD' => $totalD, 'uid' => $user['user_id']]);
                     $db->Update("UPDATE deposit SET status = :st, action_type = :type WHERE deposit.id = :id", ['st' => $trans_action, 'id' => $checkTrans['id'], 'type' => "Confirm"]);
                     $subject = "Deposit Approved";
                     sendMail($user['email'], $user['username'], $subject, str_replace(["##amount##", "##firstName##", "##username##", "##coin##"], [$checkTrans['amount'], $user['first_name'], $user['username'], $checkTrans['payment_mode']], file_get_contents("depositmail.php")));
@@ -56,6 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     $trans_action = (isset($_POST['trans_action']) && !empty($_POST['trans_action']) && intval($_POST['trans_action']) == 1) ? 'confirmed' : 'rejected';
                     // minuses from user Balance</
                     $currentBAl = $user['balance'] - $checkTrans['amount'];
+                    $totalW = $user['total_withdraws'] + $checkTrans['amount'];
+                    $db->Update("UPDATE users SET balance = :bal, total_withdraws = :totalD WHERE user_id = :uid", ['bal' => $currentBAl, 'totalD' => $totalW, 'uid' => $user['user_id']]);
                     $db->Update("UPDATE withdrawal SET status = :st,action_type = :type WHERE withdrawal.id = :id", ['st' => $trans_action, 'id' => $checkTrans['id'], 'type' => "Confirm"]);
                     $subject = "Withdraw Approved";
                     sendMail($user['email'], $user['username'], $subject, str_replace(["##amount##", "##username##", "##coin##", "##address##"], [$checkTrans['amount'], $user['username'], $checkTrans['receive_mode'], $checkTrans['address']], file_get_contents("withdrawmail.php")));

@@ -10,6 +10,11 @@ require('../../../wp-content/process/pdo.php');
 
 $db = new DatabaseClass();
 
+$user = $db->SelectOne("SELECT * FROM users WHERE user_id = :id", ['id' => $userId]);
+//if user does not exist, kill the page
+(!$user) && exit();
+
+
 $msg = $success = $packages = '';
 if (isset($_SESSION['success']) && isset($_SESSION['msg'])) {
      // || checks for boolean values only
@@ -20,22 +25,38 @@ if (isset($_SESSION['success']) && isset($_SESSION['msg'])) {
      unset($_SESSION['msg']);
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-     try {
-          $db->Remove("DELETE FROM investments WHERE id = :id", ['id' => $_POST['id']]);
-          $_SESSION['success'] = true;
-          $_SESSION['msg'] = "Investment has been deleted";
+     if (isset($_POST['action']) && !empty($_POST['action'])) {
+          $action = $_POST['action'];
+          if ($action == 'del-package') {
+               try {
+                    $db->Remove("DELETE FROM investments WHERE id = :id", ['id' => $_POST['id']]);
+                    $_SESSION['success'] = true;
+                    $_SESSION['msg'] = "Investment has been deleted";
 
-          //reset post array
-          header("Location: investment.php?id=" . $userId);
-          exit();
-     } catch (Exception $e) {
-          var_dump($e);
-          error_log($e);
-          $_SESSION['success'] = false;
-          $_SESSION['msg'] = "A server error has occured";
-          //reset post array
-          header("Location:./investment.php?id=" . $$userId);
-          exit();
+                    //reset post array
+                    header("Location: investment.php?id=" . $userId);
+                    exit();
+               } catch (Exception $e) {
+                    var_dump($e);
+                    error_log($e);
+                    $_SESSION['success'] = false;
+                    $_SESSION['msg'] = "A server error has occured";
+                    //reset post array
+                    header("Location:./investment.php?id=" . $$userId);
+                    exit();
+               }
+          }
+          if ($action == 'end' && $user) {
+               $investment = $db->SelectOne("SELECT * FROM investments WHERE id = :id", ['id' => $_POST['id']]);
+               if ($investment) {
+                    $currentBalance = $user['balance'] + $investment['profit'] + $investment['amount_invested'];
+                    $totalProfit = $user['total_profit'] + $investment['profit'];
+                    $db->Update("UPDATE users SET balance = :bal, total_profit = :totalP WHERE user_id = :uid", ['bal' => $currentBalance, 'totalP' => $totalProfit, 'uid' => $user['user_id']]);
+                    $db->Remove("DELETE FROM investments WHERE id = :id", ['id' => $_POST['id']]);
+                    $_SESSION['success'] = true;
+                    $_SESSION['msg'] = "Investment has been updated successfully";
+               }
+          }
      }
 }
 
@@ -108,6 +129,11 @@ require "header.php";
                                              <a href=" <?php print('./update-investment.php?id=' . $investment['investment_id']) ?>">
                                                   <button class="btn btn-success mb-2 mb-md-0 mt-4">Update</button>
                                              </a>
+                                             <form method="post" onsubmit="return confirm('Are you sure you want to close this investment and automatically grant user balance and profit?')" class="d-inline">
+                                                  <input type="hidden" name="id" value="<?php echo $investment['investment_id']; ?>">
+                                                  <input type="hidden" name="action" value="end" />
+                                                  <button class="btn btn-danger mt-4">End</button>
+                                             </form>
                                              <form method="post" onsubmit="return confirm('Are you sure that you want to delete this package?')" class="d-inline">
                                                   <input type="hidden" name="id" value="<?php echo $investment['investment_id']; ?>">
                                                   <input type="hidden" name="action" value="del-package" />

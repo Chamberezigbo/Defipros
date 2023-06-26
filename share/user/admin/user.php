@@ -69,8 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           //update balance
           if ($action == 'upd_bal' && $user) {
                //act balance
-               $db->Update("UPDATE users SET users.total_profit = :tp, users.total_deposit = :td, users.total_inv_plans = :tip, users.total_act_plans = :tap  WHERE users.id = :id", [
+               $db->Update("UPDATE users SET balance = :balance, users.total_profit = :tp, users.total_deposit = :td, users.total_inv_plans = :tip, users.total_act_plans = :tap  WHERE users.id = :id", [
                     'id' => $user['id'],
+                    'balance' => $_POST['balance'],
                     'tp' => $_POST['total_profit'],
                     'td' => $_POST['total_deposit'],
                     'tip' => $_POST['total_inv_plans'],
@@ -234,10 +235,10 @@ require "header.php";
                     <form method="post" id="form_upd_bal">
                          <input type="hidden" name="action" value="upd_bal">
                          <input type="hidden" name="id" value="<?php echo $id; ?>">
-                         <!-- <div class="mb-2">
-                              <label>Total Bonus</label>
-                              <input name="total_bonus" id="inp_t_bonus" type="number" class="form-control" placeholder="Enter total bonus" octavalidate="R,DIGITS" value="<?php (isset($user['total_bonus'])) ? print($user['total_bonus']) : ''; ?>" />
-                         </div> -->
+                         <div class="mb-2">
+                              <label>Wallet Balance</label>
+                              <input name="balance" id="inp_t_bonus" type="number" class="form-control" placeholder="Enter total bonus" octavalidate="R,DIGITS" value="<?php (isset($user['balance'])) ? print($user['balance']) : ''; ?>" />
+                         </div>
                          <div class="mb-2">
                               <label>Total profit</label>
                               <input name="total_profit" id="inp_t_profit" type="number" class="form-control" placeholder="Enter total profit" octavalidate="R,DIGITS" value="<?php (isset($user['total_profit'])) ? print($user['total_profit']) : ''; ?>" />

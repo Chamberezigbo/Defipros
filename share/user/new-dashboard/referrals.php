@@ -43,6 +43,45 @@ require('header.php');
           visibility: hidden;
           border: 1px solid #e5e5e5;
      }
+
+     .family-tree {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          grid-gap: 20px;
+     }
+
+     .person {
+          display: flex;
+          align-items: center;
+          position: relative;
+          padding-left: 40px;
+     }
+
+     .person::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 20px;
+          border-left: 1px solid #ccc;
+          height: 100%;
+     }
+
+     .person .name {
+          background-color: black;
+          padding: 10px 20px;
+          border-radius: 4px;
+          text-align: center;
+          white-space: nowrap;
+     }
+
+     .person .name::after {
+          content: "";
+          position: absolute;
+          top: calc(50% - 1px);
+          left: -10px;
+          border-top: 1px solid #ccc;
+          width: 10px;
+     }
 </style>
 </header>
 <!-- header-section end  -->
@@ -67,6 +106,27 @@ require('header.php');
                               <div class="input-group">
                                    <input type="text" name="text" class="form-control form--control referralURL" value="https://defiprosolutions.com/share/user/register.php?ref=<?= $username ?>" readonly>
                                    <span class="input-group-text copytext copyBoard" id="copyBoard"> <i class="fa fa-copy"></i> </span>
+                              </div>
+                              <div class="mt-5">
+                                   <label>Referrals</label>
+                                   <?php
+                                   $results = $db->SelectAll("SELECT * FROM users WHERE referral = :referral", ['referral' => $username]);
+                                   if ($results && count($results)) {
+                                        foreach ($results as $i => $result) {
+                                   ?>
+                                             <div class="family-tree">
+                                                  <div class="person">
+                                                       <div class="name"><?php echo $result['first_name'] . ' ' . $result['last_name']; ?></div>
+                                                  </div>
+                                             </div>
+                                        <?php
+                                        }
+                                   } else {
+                                        ?>
+                                        <label class="text-center">
+                                             No data available in table
+                                        </label>
+                                   <?php }; ?>
                               </div>
                          </div>
                     </div>
