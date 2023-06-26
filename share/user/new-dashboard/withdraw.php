@@ -165,7 +165,7 @@ require('header.php');
                <div class="row mb-4 mb-sm-5 justify-content-center">
                     <div class="col-lg-6">
                          <div class="text-end">
-                              <a href="" class="btn btn--base">Withdraw History</a>
+                              <a href="transactions.php" class="btn btn--base">Withdraw History</a>
                          </div>
                     </div>
                </div>
