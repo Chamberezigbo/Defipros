@@ -7,9 +7,11 @@ require('../../../wp-content/process/pdo.php');
 $db = new DatabaseClass();
 
 
-$deposits = $db->SelectAll("SELECT * FROM deposit ", []);
-$withdrawals = $db->SelectAll("SELECT * FROM withdrawal", []);
-$bonus = $db->SelectAll("SELECT * FROM bonus", []);
+$deposits = $deposits = $db->SelectAll("SELECT d.*, u.email FROM deposit AS d JOIN users AS u ON d.user_id = u.user_id", []);
+$withdrawals =
+     $db->SelectAll("SELECT d.*, u.email FROM withdrawal AS d JOIN users AS u ON d.user_id = u.user_id", []);
+$bonus =
+     $db->SelectAll("SELECT d.*, u.email FROM bonus AS d JOIN users AS u ON d.userid = u.user_id", []);
 
 //success / failure error
 $msg = $success = '';
@@ -63,6 +65,7 @@ require 'header.php';
                               <table class="table table-bordered">
                                    <thead>
                                         <tr>
+                                             <th>Email</th>
                                              <th>Amount </th>
                                              <th>Payment mode </th>
                                              <th>Status</th>
@@ -82,6 +85,9 @@ require 'header.php';
                                         ?>
                                              <tr>
                                                   <td>
+                                                       <?php echo ($deposit['email']); ?>
+                                                  </td>
+                                                  <td>
                                                        <?php echo ($deposit['amount']); ?>
                                                   </td>
                                                   <td>
@@ -94,7 +100,8 @@ require 'header.php';
                                                        <?php echo (date('D m M, Y', $deposit['date'])); ?>
                                                   </td>
                                              </tr>
-                                        <?php } ?>
+                                        <?php
+                                        } ?>
                                    </tbody>
                               </table>
                          </div>
@@ -102,6 +109,7 @@ require 'header.php';
                               <table class="table table-bordered">
                                    <thead>
                                         <tr>
+                                             <th>Email</th>
                                              <th>Amount </th>
                                              <th>Charges</th>
                                              <th>Payment mode </th>
@@ -121,6 +129,9 @@ require 'header.php';
                                         foreach ($withdrawals as $i => $withdrawal) {
                                         ?>
                                              <tr>
+                                                  <td>
+                                                       <?php echo ($withdrawal['email']); ?>
+                                                  </td>
                                                   <td>
                                                        <?php echo ($withdrawal['amount']); ?>
                                                   </td>
@@ -145,6 +156,7 @@ require 'header.php';
                               <table class="table table-bordered">
                                    <thead>
                                         <tr>
+                                             <td>email</td>
                                              <th>Amount</th>
                                              <th>Type</th>
                                              <th>Date</th>
@@ -162,6 +174,9 @@ require 'header.php';
                                         foreach ($bonus as $i => $bonu) {
                                         ?>
                                              <tr>
+                                                  <td>
+                                                       <?php echo ($bonu['email']); ?>
+                                                  </td>
                                                   <td>
                                                        <?php echo ($bonu['amount']); ?>
                                                   </td>
