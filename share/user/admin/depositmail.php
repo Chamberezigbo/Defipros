@@ -39,7 +39,7 @@
                </h1>
 
                <p style="font-size: 11px; text-align: justify; line-height: 2">
-                    Your deposit request of ##amount## USD is vai ##coin## is Approved. <br>
+                    Your deposit request of ##amount## USD vai ##coin## is ##status##. <br>
                     <br>Details of your Deposit: <br>
                     Amount: ##amount## USD
                     Charge: <span style="color: red;">0.00 USD</span>

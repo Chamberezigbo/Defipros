@@ -33,7 +33,7 @@
                <h1> Withdrawal Status </h1>
                <p style="margin-top: 5%">Hello ##username##</p>
                <p style="font-size: 11px; text-align: justify; line-height: 2">
-                    This is to inform you that your withdrawal request of $##amount## has being successfully approved and sent your chosen ##coin##
+                    This is to inform you that your withdrawal request of $##amount## has being ##status## ##coin##
                     wallet address ##address##. Do ensure to check your dashboard ad wallet to verify this claim
                </p>
                <p style=" margin-top: 3%; font-size: 11px; text-align: justify; line-height: 2; ">

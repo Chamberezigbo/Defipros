@@ -41,7 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     $db->Update("UPDATE users SET balance = :bal, total_deposit = :totalD WHERE user_id = :uid", ['bal' => $currentBAl, 'totalD' => $totalD, 'uid' => $user['user_id']]);
                     $db->Update("UPDATE deposit SET status = :st, action_type = :type WHERE deposit.id = :id", ['st' => $trans_action, 'id' => $checkTrans['id'], 'type' => "Confirm"]);
                     $subject = "Deposit Approved";
-                    sendMail($user['email'], $user['username'], $subject, str_replace(["##amount##", "##firstName##", "##username##", "##coin##"], [$checkTrans['amount'], $user['first_name'], $user['username'], $checkTrans['payment_mode']], file_get_contents("depositmail.php")));
+                    $status = "Approved";
+                    sendMail($user['email'], $user['username'], $subject, str_replace(["##amount##", "##firstName##", "##username##", "##coin##", "#status##"], [$checkTrans['amount'], $user['first_name'], $user['username'], $checkTrans['payment_mode'], $status], file_get_contents("depositmail.php")));
                     $_SESSION['success'] = true;
                     $_SESSION['msg'] = "Transaction has been updated successfully";
                     //reset post array
@@ -49,6 +50,27 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     exit();
                }
           }
+          //reject deposit transaction
+          if ($action == 'reject_deposit' && $user) {
+               //check if transaction exists
+               $checkTrans = $db->SelectOne("SELECT * FROM deposit WHERE deposit.user_id = :uid AND deposit.action_type IS NULL ", ['uid' => $user['user_id']]);
+               //check if transaction exists
+               if ($checkTrans) {
+                    $trans_action = (isset($_POST['trans_action']) && !empty($_POST['trans_action']) && intval($_POST['trans_action']) == 0) ? 'reject' : 'confirmed';
+                    $currentBAl = $user['balance'];
+                    $totalD = $user['total_deposit'];
+                    $db->Update("UPDATE deposit SET status = :st, action_type = :type WHERE deposit.id = :id", ['st' => $trans_action, 'id' => $checkTrans['id'], 'type' => "Reject"]);
+                    $subject = "Deposit Rejected";
+                    $status = "Rejected";
+                    sendMail($user['email'], $user['username'], $subject, str_replace(["##amount##", "##firstName##", "##username##", "##coin##", "##status##"], [$checkTrans['amount'], $user['first_name'], $user['username'], $checkTrans['payment_mode'], $status], file_get_contents("depositmail.php")));
+                    $_SESSION['success'] = true;
+                    $_SESSION['msg'] = "Transaction has been updated successfully";
+                    //reset post array
+                    header("Location: ./transactions.php?id=$id");
+                    exit();
+               }
+          }
+
           if ($action == 'confirm_withdrawal' && $user) {
                //check if transaction exists
                $checkTrans = $db->SelectOne("SELECT * FROM withdrawal WHERE withdrawal.user_id = :uid AND withdrawal.action_type IS NULL", ['uid' => $user['user_id']]);
@@ -61,7 +83,29 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     $db->Update("UPDATE users SET balance = :bal, total_withdraws = :totalD WHERE user_id = :uid", ['bal' => $currentBAl, 'totalD' => $totalW, 'uid' => $user['user_id']]);
                     $db->Update("UPDATE withdrawal SET status = :st,action_type = :type WHERE withdrawal.id = :id", ['st' => $trans_action, 'id' => $checkTrans['id'], 'type' => "Confirm"]);
                     $subject = "Withdraw Approved";
-                    sendMail($user['email'], $user['username'], $subject, str_replace(["##amount##", "##username##", "##coin##", "##address##"], [$checkTrans['amount'], $user['username'], $checkTrans['receive_mode'], $checkTrans['address']], file_get_contents("withdrawmail.php")));
+                    $status = "successfully approved and sent your chosen";
+                    sendMail($user['email'], $user['username'], $subject, str_replace(["##amount##", "##username##", "##coin##", "##address##", "##status##"], [$checkTrans['amount'], $user['username'], $checkTrans['receive_mode'], $checkTrans['address'], $status], file_get_contents("withdrawmail.php")));
+                    $_SESSION['success'] = true;
+                    $_SESSION['msg'] = "Transaction has been updated successfully";
+                    //reset post array
+                    header("Location: ./transactions.php?id=$id ");
+                    exit();
+               }
+          }
+
+          if ($action == 'reject_withdrawal' && $user) {
+               //check if transaction exists
+               $checkTrans = $db->SelectOne("SELECT * FROM withdrawal WHERE withdrawal.user_id = :uid AND withdrawal.action_type IS NULL", ['uid' => $user['user_id']]);
+               //check if transaction exists
+               if ($checkTrans) {
+                    $trans_action = (isset($_POST['trans_action']) && !empty($_POST['trans_action']) && intval($_POST['trans_action']) == 0) ? 'rejected' : 'confirmed';
+                    // minuses from user Balance</
+                    $currentBAl = $user['balance'];
+                    $totalW = $user['total_withdraws'];
+                    $db->Update("UPDATE withdrawal SET status = :st,action_type = :type WHERE withdrawal.id = :id", ['st' => $trans_action, 'id' => $checkTrans['id'], 'type' => "Reject"]);
+                    $subject = "Withdraw Rejected";
+                    $status = "successfully rejected and nothing was sent to your";
+                    sendMail($user['email'], $user['username'], $subject, str_replace(["##amount##", "##username##", "##coin##", "##address##", "##status##"], [$checkTrans['amount'], $user['username'], $checkTrans['receive_mode'], $checkTrans['address'], $status], file_get_contents("withdrawmail.php")));
                     $_SESSION['success'] = true;
                     $_SESSION['msg'] = "Transaction has been updated successfully";
                     //reset post array
@@ -217,7 +261,7 @@ require 'header.php';
                                                             <button class="btn btn-success">Confirm</button>
                                                        </form>
                                                        <form method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to reject this transaction?')">
-                                                            <input type="hidden" name="action" value="confirm_withdrawal" />
+                                                            <input type="hidden" name="action" value="reject_withdrawal" />
                                                             <input type="hidden" name="trans_action" value="0" />
                                                             <input type="hidden" name="trans_id" value="<?php echo $deposit['id']; ?>" />
                                                             <button class="btn btn-danger">Reject</button>
