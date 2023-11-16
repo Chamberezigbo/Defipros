@@ -794,63 +794,35 @@ include("header.php");
                                                   </div>
                                              </div>
                                    </section>
-                                   <section class="elementor-section elementor-top-section elementor-element elementor-element-cbba76d elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="cbba76d" data-element_type="section">
-                                        <div class="elementor-container elementor-column-gap-default">
-                                             <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-1b36aab" data-id="1b36aab" data-element_type="column">
-                                                  <div class="elementor-widget-wrap elementor-element-populated">
-                                                       <div class="elementor-element elementor-element-dcb9d8e elementor-aspect-ratio-169 elementor-widget elementor-widget-video" data-id="dcb9d8e" data-element_type="widget" data-settings='{"youtube_url":"https:\/\/youtu.be/h3ttRYOTgxc","video_type":"youtube","controls":"yes","aspect_ratio":"169"}' data-widget_type="video.default">
-                                                            <div class="elementor-widget-container">
-                                                                 <style>
-                                                                      /*! elementor - v3.10.2 - 29-01-2023 */
-                                                                      .elementor-widget-video .elementor-widget-container {
-                                                                           overflow: hidden;
-                                                                           transform: translateZ(0);
-                                                                      }
-
-                                                                      .elementor-widget-video .elementor-open-inline .elementor-custom-embed-image-overlay {
-                                                                           position: absolute;
-                                                                           top: 0;
-                                                                           left: 0;
-                                                                           width: 100%;
-                                                                           height: 100%;
-                                                                           background-size: cover;
-                                                                           background-position: 50%;
-                                                                      }
-
-                                                                      .elementor-widget-video .elementor-custom-embed-image-overlay {
-                                                                           cursor: pointer;
-                                                                           text-align: center;
-                                                                      }
-
-                                                                      .elementor-widget-video .elementor-custom-embed-image-overlay:hover .elementor-custom-embed-play i {
-                                                                           opacity: 1;
-                                                                      }
-
-                                                                      .elementor-widget-video .elementor-custom-embed-image-overlay img {
-                                                                           display: block;
-                                                                           width: 100%;
-                                                                      }
-
-                                                                      .elementor-widget-video .e-hosted-video .elementor-video {
-                                                                           -o-object-fit: cover;
-                                                                           object-fit: cover;
-                                                                      }
-
-                                                                      .e-con-inner>.elementor-widget-video,
-                                                                      .e-con>.elementor-widget-video {
-                                                                           width: var(--container-widget-width);
-                                                                           --flex-grow: var(--container-widget-flex-grow);
-                                                                      }
-                                                                 </style>
-                                                                 <div class="elementor-wrapper elementor-fit-aspect-ratio elementor-open-inline">
-                                                                      <div class="elementor-video"></div>
-                                                                 </div>
-                                                            </div>
-                                                       </div>
-                                                  </div>
-                                             </div>
+                                   <section class="responsive-video-section">
+                                        <div class="video-container">
+                                             <!-- Replace 'VIDEO_ID' with the actual YouTube video ID -->
+                                             <iframe width="560" height="315" src="src=" https://www.youtube.com/embed/Wgzz1hAg0gg" frameborder="0" allowfullscreen></iframe>
                                         </div>
+                                        <style>
+                                             .responsive-video-section {
+                                                  position: relative;
+                                                  overflow: hidden;
+                                                  width: 100%;
+                                                  padding-top: 56.25%;
+                                                  /* 16:9 aspect ratio for responsive scaling */
+                                             }
+
+                                             .video-container {
+                                                  position: absolute;
+                                                  top: 0;
+                                                  left: 0;
+                                                  width: 100%;
+                                                  height: 100%;
+                                             }
+
+                                             .video-container iframe {
+                                                  width: 100%;
+                                                  height: 100%;
+                                             }
+                                        </style>
                                    </section>
+
                                    <section class="elementor-section elementor-top-section elementor-element elementor-element-e262b18 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="e262b18" data-element_type="section">
                                         <div class="elementor-container elementor-column-gap-default">
                                              <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-4dbae65" data-id="4dbae65" data-element_type="column">

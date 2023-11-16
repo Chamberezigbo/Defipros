@@ -68,7 +68,7 @@
  <script>
       "use strict";
       (function($) {
-           $(`option[data-code=NG]`).attr('selected', '');
+           $(`option[data-code=US]`).attr('selected', '');
            $('select[name=country]').change(function() {
                 $('input[name=mobile_code]').val($('select[name=country] :selected').data('mobile_code'));
                 $('input[name=country_code]').val($('select[name=country] :selected').data('code'));
